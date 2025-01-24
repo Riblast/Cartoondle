@@ -17,7 +17,7 @@ export function CharacterSearch({ onGuess, isGameComplete }: CharacterSearchProp
   const [characters, setCharacters] = useState<Character[]>([])
 
   useEffect(() => {
-    fetch('http://localhost:4000/characters/names')
+    fetch(`${process.env.BACKEND_URL}/characters/names`)
       .then((res) => res.json())
       .then((data) => {
         setCharacters(data)
