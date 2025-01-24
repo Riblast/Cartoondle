@@ -6,8 +6,8 @@ export function compareCharacters(guess: Character, target: Character): Characte
   // Compare show
   attributes.push({
     category: 'Show',
-    value: guess.attributes.show,
-    color: guess.attributes.show === target.attributes.show ? 'green' : 'red'
+    value: guess.show,
+    color: guess.show === target.show ? 'green' : 'red'
   })
 
   // Compare gender
