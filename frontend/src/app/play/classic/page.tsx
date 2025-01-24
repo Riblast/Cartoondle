@@ -20,8 +20,8 @@ export default function ClassicGame() {
   const [dailyCharacter, setDailyCharacter] = useState<Character>({
   id: "",
   name: "",
+  show: "",
   attributes: {
-    show: "",
     gender: "Other",
     species: "",
     powers: [],
