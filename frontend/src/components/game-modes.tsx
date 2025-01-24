@@ -1,7 +1,7 @@
 'use client'
 
 import { Card } from '@/components/ui/card'
-import { Eye, Play, Quote, Wand2, HelpCircle } from 'lucide-react'
+import { Play, HelpCircle } from 'lucide-react'
 import Link from 'next/link'
 import { DynamicText } from './DynamicText'
 
