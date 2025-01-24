@@ -53,7 +53,7 @@ useEffect(() => {
 }, [isComplete])
 
   useEffect(() => {
-    fetch('http://localhost:4000/characters/daily')
+    fetch(`${process.env.BACKEND_URL}/characters/daily`)
       .then((res) => res.json())
       .then((data) => {
         setDailyCharacter(data)
@@ -62,7 +62,7 @@ useEffect(() => {
 
   const handleGuess = async(characterId: string) => {
     try {
-      const response = await fetch(`http://localhost:4000/characters/${characterId}`)
+      const response = await fetch(`${process.env.BACKEND_URL}/characters/${characterId}`)
       const guessedCharacter: Character = await response.json()
 
       setGuesses([...guesses, guessedCharacter.name])
