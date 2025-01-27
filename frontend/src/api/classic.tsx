@@ -1,6 +1,4 @@
 export const getDailyCharacter = async () => {
-  console.log(process.env.NEXT_PUBLIC_BACKEND_URL);
-  
   const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/characters/daily`)
   return await response.json()
 }
