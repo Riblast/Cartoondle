@@ -54,8 +54,11 @@ useEffect(() => {
 }, [isComplete])
 
   useEffect(() => {
-    const character = getDailyCharacter()
-    setDailyCharacter(character)
+    const fetchCharacter = async () => {
+      const character = await getDailyCharacter()
+      setDailyCharacter(character)
+  }
+  fetchCharacter()
   }, [])
 
   const handleGuess = async(characterId: string) => {
