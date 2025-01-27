@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Command, CommandList, CommandItem } from '@/components/ui/command'
 import { Character } from '@/app/types/game'
+import { getCharacterNames } from '@/api/classic'
 
 interface CharacterSearchProps {
   onGuess: (characterId: string) => void
@@ -17,11 +18,11 @@ export function CharacterSearch({ onGuess, isGameComplete }: CharacterSearchProp
   const [characters, setCharacters] = useState<Character[]>([])
 
   useEffect(() => {
-    fetch(`${process.env.BACKEND_URL}/characters/names`)
-      .then((res) => res.json())
-      .then((data) => {
-        setCharacters(data)
-      })
+    const fetchCharacterNames = async () => {
+      const data = await getCharacterNames()
+      setCharacters(data)
+    }
+    fetchCharacterNames()
   }, [])
 
   const calculateSimilarity = (a: string, b: string) => {

@@ -10,7 +10,7 @@ import Link from 'next/link'
 import { DynamicText } from '@/components/DynamicText'
 import { Button } from '@/components/ui/button'
 import { GameStatsModal } from './game-stats-modal'
-import { getDailyCharacter } from '@/api/classic'
+import { getCharacter, getDailyCharacter } from '@/api/classic'
 
 export default function ClassicGame() {
   const [guesses, setGuesses] = useState<string[]>([])
@@ -21,8 +21,8 @@ export default function ClassicGame() {
   const [dailyCharacter, setDailyCharacter] = useState<Character>({
   id: "",
   name: "",
-  show: "",
   attributes: {
+    show: "",
     gender: "Other",
     species: "",
     powers: [],
@@ -63,13 +63,16 @@ useEffect(() => {
 
   const handleGuess = async(characterId: string) => {
     try {
-      const response = await fetch(`${process.env.BACKEND_URL}/characters/${characterId}`)
-      const guessedCharacter: Character = await response.json()
+      const guessedCharacter = await getCharacter(characterId)
+      console.log(guessedCharacter);
+      
 
       setGuesses([...guesses, guessedCharacter.name])
     
       const newAttributes = compareCharacters(guessedCharacter, dailyCharacter)
       setRevealedAttributes([...revealedAttributes, newAttributes])
+      console.log([...revealedAttributes, newAttributes]);
+      
   
       if (guessedCharacter.name.toLowerCase() === dailyCharacter.name.toLowerCase()) {
         setIsComplete(true)

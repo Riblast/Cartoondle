@@ -7,8 +7,9 @@ export interface CharacterAttribute {
 export interface Character {
   id: string
   name: string
-  show: string
+  show?: string
   attributes: {
+    show: string
     gender: 'Male' | 'Female' | 'Other'
     species: string
     powers: string[]
