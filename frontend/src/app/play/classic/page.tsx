@@ -10,7 +10,7 @@ import Link from 'next/link'
 import { DynamicText } from '@/components/DynamicText'
 import { Button } from '@/components/ui/button'
 import { GameStatsModal } from './game-stats-modal'
-import { getDailyCharacter } from '@/api/classic'
+import { getCharacter, getDailyCharacter } from '@/api/classic'
 
 export default function ClassicGame() {
   const [guesses, setGuesses] = useState<string[]>([])
@@ -63,8 +63,7 @@ useEffect(() => {
 
   const handleGuess = async(characterId: string) => {
     try {
-      const response = await fetch(`${process.env.BACKEND_URL}/characters/${characterId}`)
-      const guessedCharacter: Character = await response.json()
+      const guessedCharacter = await getCharacter(characterId)
 
       setGuesses([...guesses, guessedCharacter.name])
     
