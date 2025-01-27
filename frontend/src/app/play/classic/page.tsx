@@ -21,8 +21,8 @@ export default function ClassicGame() {
   const [dailyCharacter, setDailyCharacter] = useState<Character>({
   id: "",
   name: "",
-  show: "",
   attributes: {
+    show: "",
     gender: "Other",
     species: "",
     powers: [],
@@ -64,11 +64,15 @@ useEffect(() => {
   const handleGuess = async(characterId: string) => {
     try {
       const guessedCharacter = await getCharacter(characterId)
+      console.log(guessedCharacter);
+      
 
       setGuesses([...guesses, guessedCharacter.name])
     
       const newAttributes = compareCharacters(guessedCharacter, dailyCharacter)
       setRevealedAttributes([...revealedAttributes, newAttributes])
+      console.log([...revealedAttributes, newAttributes]);
+      
   
       if (guessedCharacter.name.toLowerCase() === dailyCharacter.name.toLowerCase()) {
         setIsComplete(true)
