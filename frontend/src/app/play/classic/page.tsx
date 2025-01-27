@@ -10,6 +10,7 @@ import Link from 'next/link'
 import { DynamicText } from '@/components/DynamicText'
 import { Button } from '@/components/ui/button'
 import { GameStatsModal } from './game-stats-modal'
+import { getDailyCharacter } from '@/api/classic'
 
 export default function ClassicGame() {
   const [guesses, setGuesses] = useState<string[]>([])
@@ -53,11 +54,8 @@ useEffect(() => {
 }, [isComplete])
 
   useEffect(() => {
-    fetch(`${process.env.BACKEND_URL}/characters/daily`)
-      .then((res) => res.json())
-      .then((data) => {
-        setDailyCharacter(data)
-      })
+    const character = getDailyCharacter()
+    setDailyCharacter(character)
   }, [])
 
   const handleGuess = async(characterId: string) => {
