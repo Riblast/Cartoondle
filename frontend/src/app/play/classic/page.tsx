@@ -64,15 +64,11 @@ useEffect(() => {
   const handleGuess = async(characterId: string) => {
     try {
       const guessedCharacter = await getCharacter(characterId)
-      console.log(guessedCharacter);
-      
 
       setGuesses([...guesses, guessedCharacter.name])
     
       const newAttributes = compareCharacters(guessedCharacter, dailyCharacter)
       setRevealedAttributes([...revealedAttributes, newAttributes])
-      console.log([...revealedAttributes, newAttributes]);
-      
   
       if (guessedCharacter.name.toLowerCase() === dailyCharacter.name.toLowerCase()) {
         setIsComplete(true)
