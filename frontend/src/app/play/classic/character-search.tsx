@@ -39,10 +39,12 @@ export function CharacterSearch({ onGuess, isGameComplete }: CharacterSearchProp
 
     return similarity / Math.max(lengthA, lengthB)
   }
-
   const filteredCharacters = characters
-    .filter(character => character.name.toLowerCase().startsWith(search.toLowerCase()))
-    .sort((a, b) => calculateSimilarity(b.name.toLowerCase(), search.toLowerCase()) - calculateSimilarity(a.name.toLowerCase(), search.toLowerCase()))
+  .filter(character => 
+    character.name.toLowerCase().includes(search.toLowerCase()) ||
+    character.show?.toLowerCase().includes(search.toLowerCase())
+  )
+  .sort((a, b) => calculateSimilarity(b.name.toLowerCase(), search.toLowerCase()) - calculateSimilarity(a.name.toLowerCase(), search.toLowerCase()));
 
   const handleSubmit = (characterId: string) => {
     onGuess(characterId)
@@ -58,7 +60,7 @@ export function CharacterSearch({ onGuess, isGameComplete }: CharacterSearchProp
           placeholder="Type character name..."
           value={search}
           onChange={(e) => {
-            setSearch(e.target.value.trim())
+            setSearch(e.target.value)
             setShowSuggestions(true)
           }}
           disabled={isGameComplete}
